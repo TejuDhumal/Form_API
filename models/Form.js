@@ -3,20 +3,16 @@ const mongoosePaginate = require('mongoose-paginate-v2');
 
 var FormSchema = new mongoose.Schema({
 
-    createdBy: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+    email: {
+       type:String
     },
 
-    name:{
+    title:{
 
         type: String
     } ,
 
-    description: {
-        type: String,
-        default: ""
-    },
+
 
     // questions: [{
     //     // open: { type: Boolean, default: false },

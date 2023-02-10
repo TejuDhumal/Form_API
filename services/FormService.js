@@ -41,16 +41,18 @@ module.exports = {
         }
     },
 
-    getFormById: async (req, res) => {
+    getFormByEmail: async (req, res) => {
         try {
-            var formId = req.params.formId;
+            var email = req.params.email;
 
-            await FormModel.find({ _id: formId }).then(async (form) => {
+            await FormModel.find({ email: email }).then(async (form) => {
 
                 if (form == null) {
                     res.status(404).send('Form not found');
                 } else {
                     res.status(200).json(form)
+
+
                 }
             })
 
@@ -121,13 +123,13 @@ module.exports = {
 
     getAllFormsOfUser: async (req, res) => {
         try {
-            var userId = req.params.userId;
-            console.log(userId);
-            await UserModel.findOne({ _id: userId }).then(async (user) => {
+            var email = req.params.email;
+            console.log(email);
+            await FormModel.find({ _id: email }).then(async (user) => {
                 if (user == null) {
                     res.status(404).send('User not found');
                 } else {
-                    await FormModel.find().where('_id').in(user.createdForms).exec((err, records) => {
+                    await FormModel.find().where('_id').in().exec((err, records) => {
                         console.log(records);
 
                         res.status(200).json(records);
